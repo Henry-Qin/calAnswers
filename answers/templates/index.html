@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Answers</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='angular.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='calAnswersModule.js') }}"></script>
+</head>
+
+<body>
+  <header>CalAnswers</header>
+<div ng-app="calAnswers" ng-controller="myCtrl">
+<div class="flexbox-container">
+  <article class="main">
+    <div class="maintitle">
+      Main
+      <p></p>
+   <form class="searchbox" action="">
+        <input type="search" placeholder="search.." ng-model="searchEntry" ng-change="searchEntryChanged()"/>
+        <ul class="suggestions">
+            <li ng-repeat="r in records track by $index">
+                <a href="#"> {{ '{{ r }}' }} </a>
+            </li>
+            <!--<li><a href="#">UC Berkeley Employee head count for Year...</a></li>-->
+            <!--<li><a href="#">Department Economics Female  Employee Count...</a></li>-->
+            <!--<li><a href="#"> Staff to Faculty percentage in...</a></li>-->
+            <!--<li><a href="#">Previous Year Male to Female Employee ratio...</a></li>-->
+        </ul>
+    </form>
+    </div>
+  </article>
+  <a href="#menu" id="toggle"><span></span></a>
+
+<div id="menu">
+     <div class='navtitle'>
+  FAQ
+       <p></p>
+</div>
+
+  <div>
+  <input type="checkbox" id="question1" name="q"  class="questions">
+  <div class="plus">+</div>
+  <label for="question1" class="question">
+    This is the question that will be asked?
+  </label>
+  <div class="answers">
+    What if the answer is really long and wraps the whole page and you never want to finish it but you have to because its the answer!
+  </div>
+</div>
+
+<div>
+  <input type="checkbox" id="question2" name="q" class="questions">
+  <div class="plus">+</div>
+  <label for="question2" class="question">
+    Short?
+  </label>
+  <div class="answers">
+    short!
+  </div>
+</div>
+  
+<div>
+  <input type="checkbox" id="question3" name="q" class="questions">
+  <div class="plus">+</div>
+  <label for="question3" class="question">
+    But what if the question is really long and wraps the whole page and you feel like you will never finish reading the question?
+  </label>
+  <div class="answers">
+    This is the answer!
+  </div>
+</div>
+  <div class="trending">
+  Trending words
+    <div class="words">
+    <p>economics</p> 
+    <p>statistics</p>
+    <p>undergraduate</p> 
+    </div>
+    </div>
+</div>
+</div>
+</div>
+<footer>supported by</footer>
+    <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
+</body>
+</html>

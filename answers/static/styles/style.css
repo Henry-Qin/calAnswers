@@ -1,0 +1,296 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,800);
+
+body{
+  font-family: 'Open Sans';
+	background-color: #111;
+  margin: 0;
+  padding: 0;
+}
+header{
+	background-color: #062e6d;
+	padding: 1rem 3rem;
+  font-size: 30px;
+  color:white;
+  margin: 0 auto;
+}
+footer{
+  background-color: #062e6d;
+	padding: 3rem;}
+.flexbox-container{
+	display: flex;
+	width: 100%;
+}
+
+
+.navtitle {
+  font-size: 30px;
+  color: #db9e02;
+}
+
+.trending {
+  font-size: 30px;
+  color: #db9e02;
+}
+
+.words {
+  font-size: 20px;}
+
+.question {
+  position: relative; 
+  background: #f7c138;
+  padding: 10px 10px 10px 50px;
+  display: block;
+  cursor: pointer;
+}
+
+.answers {
+  margin: 5px 0;
+  height: 0;
+  position: relative;
+  opacity: 0;
+  -webkit-transition: .7s ease;
+  -moz-transition: .7s ease;
+  -o-transition: .7s ease;
+  transition: .7s ease;
+}
+
+.questions:checked ~ .answers{
+  height: auto;
+  opacity: 1;
+  padding: 15px;
+}
+
+.plus {
+  position: absolute;
+  margin-left: 10px;
+  z-index: 5;
+  font-size: 2em;
+  -webkit-user-select: none;    
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  -webkit-transition: .3s ease;
+  -moz-transition: .3s ease;
+  -o-transition: .3s ease;
+  transition: .3s ease;
+}
+
+.questions:checked ~ .plus {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.questions {
+  display: none;
+}
+
+.main{
+	order: 1;
+	flex: 5;
+	background-color: white;
+  padding: 1.5rem;
+}
+
+.maintitle {
+  font-size: 40px;
+  margin: 0 3rem
+}
+
+.box1, .box2 {
+  min-height: 100%;
+	padding: 1em;
+}
+
+/*For searchbox*/
+.searchbox{
+/*definint width of form element*/
+    width:300px;
+/*centering the form element*/
+    margin:100px auto;
+}
+input[type="search"]{
+    padding:10px 5px 5px 10px;
+    font-size:36px;
+    color:#888;
+/*removing boder from search box*/
+    border:none;
+/*defining background image as a search symbol*/
+    background-image:url(https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=0ahUKEwjNpNmDrYrXAhWri1QKHcwYAoQQjRwIBw&url=https%3A%2F%2Fastro.berkeley.edu%2Fprospective-students%2Fabout-berkeley&psig=AOvVaw1SQKA-S1IOOpKwtTrESFzQ&ust=1508972029740041)
+       background-repeat:no-repeat;
+/*background-size*/
+-webkit-background-size:35px 35px;
+   -moz-background-size:35px 35px;
+     -o-background-size:35px 35px;
+        background-size:35px 35px;
+/*positioning background image*/
+    background-position:8px 12px;
+/*changing background color form white*/
+    background-color:#CBF4FE;
+}
+input[type="search"]::-webkit-input-placeholder{
+    color:#4389C4;
+}
+input[type="search"]:-moz-placeholder { /* Firefox 18- */
+   color: #4389C4;
+}
+input[type="search"]::-moz-placeholder {  /* Firefox 19+ */
+   color: #4389C4;
+}
+input[type="search"]:-ms-input-placeholder {  /* interner explorer*/
+   color: #4389C4;
+}
+a{
+    display:block;
+/*removing underlines from anchor element*/
+    text-decoration:none; 
+    color:#1f5350;
+    font-size:16px;
+    background-color:#c7dbe2;
+    padding:10px;
+}
+ul{
+/*removing predefined bullet points from list*/
+    list-style:none;
+/*removing padding from list items*/
+    padding:0;
+     width:465px;
+}
+ul li{
+    margin-bottom:1px;
+}
+/*adding effect when the mouse is hovered over list item*/
+.searchbox ul li a:hover{
+    color:#999;
+    background:#dee8ed;
+}
+/*moving it slightly toware right when hovered*/
+.searchbox ul li:hover{
+/*transform*/
+-webkit-transform:translateX(20px);
+   -moz-transform:translateX(20px);
+    -ms-transform:translateX(20px);
+     -o-transform:translateX(20px);
+        transform:translateX(20px);
+}
+/*now first we will hide the suggestion list*/
+.suggestions li{
+    overflow:hidden;
+    height:0;
+    -webkit-transition:all 0.3s ease-in-out;
+   -moz-transition:all 0.3s ease-in-out;
+     -o-transition:all 0.3s ease-in-out;
+        transition:all 0.3s ease-in-out;
+}
+/*and make the suggestion reappear when user focus on search field*/
+input[type="search"]:focus + .suggestions li{
+    height:55px;
+}
+
+.byline{
+  text-align:center;
+  font-size:18px;
+}
+.byline a{
+  text-decoration:none;
+  color: #1f5350;
+}
+
+#toggle {
+  display: block;
+  width: 28px;
+  height: 30px;
+  margin: 30px auto 10px;
+}
+
+#toggle span:after,
+#toggle span:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -9px;
+}
+#toggle span:after{
+  top: 9px;
+}
+#toggle span {
+  position: relative;
+  display: block;
+}
+
+#toggle span,
+#toggle span:after,
+#toggle span:before {
+  width: 100%;
+  height: 5px;
+  background-color: #888;
+  transition: all 0.3s;
+  backface-visibility: hidden;
+  border-radius: 2px;
+}
+
+/* on activation */
+#toggle.on span {
+  background-color: transparent;
+}
+#toggle.on span:before {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+#toggle.on span:after {
+  transform: rotate(-45deg) translate(7px, -8px);
+}
+#toggle.on + #menu {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* menu appearance*/
+#menu {
+  position: relative;
+  color: #999;
+  width: 300px;
+  padding: 10px;
+  margin: auto;
+  font-family: "Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif;
+  border-radius: 4px;
+  background: white;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+  /* just for this demo */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .4s;
+}
+#menu:after {
+  position: absolute;
+  top: -15px;
+  left: 95px;
+  content: "";
+  display: block;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 20px solid white;
+}
+ul, li, li a {
+  list-style: none;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+li a {
+  padding: 5px;
+  color: #888;
+  text-decoration: none;
+  transition: all .2s;
+}
+li a:hover,
+li a:focus {
+  background: #1ABC9C;
+  color: #fff;
+}
+
+
+/* demo styles */
+body { margin-top: 3em; background: #FFFFFF; color: #555; font-family: "Open Sans", "Segoe UI", Helvetica, Arial, sans-serif; }
+p, p a { font-size: 12px;text-; color: #888; }
