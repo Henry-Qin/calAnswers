@@ -4,7 +4,7 @@ from pymongo import MongoClient
 import json
 from werkzeug import secure_filename
 import csv
-from subprocess import Popen, PIPE
+import subprocess
 
 client = MongoClient("localhost:27017")
 dbString = 'CalAnswers'
@@ -15,7 +15,6 @@ UPLOAD_FOLDER = '/Users/henryqin/research/calAnswers/answers/uploads'
 ALLOWED_EXTENSIONS = {'csv'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 currFileName = None
-
 currCols = None
 
 def allowed_file(filename):
@@ -29,16 +28,19 @@ def index():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            global currFileName
             currFileName = filename
-            extractColumnNames(currFileName)
+            extractColumnNames(filename)
+            addCollection(filename)
             return redirect(url_for('index'))
     return render_template('index.html')
 
 
 def extractColumnNames(currFileName):
-    with open("uploads/" + currFileName, newline='') as csvfile:
+    with open("/Users/henryqin/research/calAnswers/answers/uploads/" + currFileName, newline='') as csvfile:
         reader = csv.DictReader(csvfile)
-        currCols = set(reader.fieldnames)
+        global currCols
+        currCols = set([i for i in reader.fieldnames if i])
 
 @app.route("/getRecords", methods=['POST'])
 def getRecords():
@@ -58,24 +60,16 @@ def getRecords():
                 currCol = searchEntry[i]
         else:
             query[currCol] = int(searchEntry[i]) if searchEntry[i].isdigit() else searchEntry[i]
-    records = db['sample'].find(query)
+    records = db[currFileName].find(query)
     for record in records:
-        recordItem = {
-            'Calender_Year': str(record['Calender_Year']),
-            'Department_desc': record['Department_desc'],
-            'Gender_Desc': record['Gender_Desc'],
-            'Job_Type': record['Job_Type'],
-            'Employee_Count': str(record['Employee_Count']),
-            'Avg_Age': str(record['Avg_Age'])
-        }
+        recordItem = {}
+        for col in currCols:
+            recordItem[col] = str(record[col])
         recordsList.append(recordItem)
-    print(recordsList)
     return json.dumps(recordsList)
 
-# @app.route("/addCollection", methods=['POST'])
-# def addCollection():
-#     mongoimport --db dbString --collection collectionName --type csv --headerline
-
+def addCollection(fileName):
+    subprocess.call(["mongoimport", "--db", dbString, "--collection", fileName, "--type", "csv", "--headerline", "--drop", "--file", "/Users/henryqin/research/calAnswers/answers/uploads/" + fileName])
 
 if __name__ == "__main__":
     app.run()
