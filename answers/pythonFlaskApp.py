@@ -40,7 +40,8 @@ def extractColumnNames(currFileName):
     with open("/Users/henryqin/research/calAnswers/answers/uploads/" + currFileName, newline='') as csvfile:
         reader = csv.DictReader(csvfile)
         global currCols
-        currCols = set([i for i in reader.fieldnames if i])
+        # currCols = set([i for i in reader.fieldnames if i])
+        currCols = set(reader.fieldnames)
 
 @app.route("/getRecords", methods=['POST'])
 def getRecords():
@@ -59,7 +60,13 @@ def getRecords():
             else:
                 currCol = searchEntry[i]
         else:
-            query[currCol] = int(searchEntry[i]) if searchEntry[i].isdigit() else searchEntry[i]
+            if searchEntry[i].isdecimal():
+                query[currCol] = float(searchEntry[i])
+            elif searchEntry[i].isdigit():
+                query[currCol] = int(searchEntry[i])
+            else:
+                query[currCol] = searchEntry[i]
+            # query[currCol] = int(searchEntry[i]) if searchEntry[i].isdigit() else searchEntry[i]
     records = db[currFileName].find(query)
     for record in records:
         recordItem = {}
