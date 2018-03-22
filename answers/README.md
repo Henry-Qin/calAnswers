@@ -14,6 +14,8 @@ The index.html of this web app contains a search bar and an upload button. A use
 by whatever is inside the search bar. This is accomplished by addCollection() in the app, which creates a subprocess that calls
 mongoimport with the file, and imports the csv file into the database. Search queries are currently being processed as (columnName, value) pairs. 
 An example query would be:
+
 ```Avg_Age 40 Year 2010```
+
 which would return all rows in the database whose 'Avg_Age' == 40 and 'Year' == 2010
 
